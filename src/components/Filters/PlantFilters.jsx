@@ -14,15 +14,24 @@ const PlantFilters = ({
         className="filters"
         style={{
             display: "flex",
-            gap: "1rem",
+
             flexWrap: "wrap",
-            marginBottom: "1rem"
+            gap: "1rem",
+            marginBottom: "2rem"
         }}
     >
         <select
             className="select"
             onChange={(e) => setTypeFilter(e.target.value)}
-            style={{ padding: "0.5rem", borderRadius: "0.5rem" }}
+            style={{
+                padding: "0.6rem 1rem",
+                borderRadius: "12px",
+                backgroundColor: "#f3e8ff",
+                color: "#1a001f",
+                border: "none",
+                fontSize: "1rem",
+                minWidth: "180px"
+            }}
         >
             <option value="">Фильтр по типу</option>
             {uniqueTypes.map((type, idx) => (
@@ -33,7 +42,15 @@ const PlantFilters = ({
         <select
             className="select"
             onChange={(e) => setRegionFilter(e.target.value)}
-            style={{ padding: "0.5rem", borderRadius: "0.5rem" }}
+            style={{
+                padding: "0.6rem 1rem",
+                borderRadius: "12px",
+                backgroundColor: "#f3e8ff",
+                color: "#1a001f",
+                border: "none",
+                fontSize: "1rem",
+                minWidth: "180px"
+            }}
         >
             <option value="">Фильтр по региону</option>
             {uniqueRegions.map((region, idx) => (
@@ -46,7 +63,15 @@ const PlantFilters = ({
                 className="select"
                 value={selectedUserId}
                 onChange={(e) => setSelectedUserId(e.target.value)}
-                style={{ padding: "0.5rem", borderRadius: "0.5rem" }}
+                style={{
+                    padding: "0.6rem 1rem",
+                    borderRadius: "12px",
+                    backgroundColor: "#f3e8ff",
+                    color: "#1a001f",
+                    border: "none",
+                    fontSize: "1rem",
+                    minWidth: "180px"
+                }}
             >
                 <option value="">Все пользователи</option>
                 {users.map((user) => (

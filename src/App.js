@@ -161,7 +161,6 @@ function App() {
         <div
             className="container"
             style={{
-                backgroundColor: "#ffe5b4",
                 minHeight: "100vh",
                 padding: "2rem"
             }}
@@ -185,8 +184,8 @@ function App() {
 
             <h1
                 style={{
-                    color: "#22c55e",
-                    textShadow: "0 0 10px #22c55e",
+                    color: "#e9d5ff",
+                    textShadow: "0 0 15px #c084fc",
                     marginBottom: "2rem"
                 }}
             >
@@ -210,7 +209,11 @@ function App() {
                 { (
                     <button
                         className="button"
-                        style={{backgroundColor: "#22c55e"}}
+                        style={{
+                            backgroundColor: "#c084fc",
+                            color: "#9a1bb3",
+                            boxShadow: "0 0 10px rgba(199, 84, 255, 0.6)"
+                        }}
                         onClick={() => {
                             loadHistory();
                             setShowHistory(true);

@@ -7,10 +7,16 @@ const PlantList = ({ plants, selectedUserId, onExchange }) => {
     const isAdmin = currentRole === "ADMIN";
 
     return (
-        <div className="grid">
+        <div
+            className="plant-row"
+            style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "1.5rem",
+                justifyContent: "flex-start"
+            }}
+        >
             {plants.map((plant) => {
-                // 🌿 если админ, сравниваем с selectedUserId
-                // 👤 если обычный пользователь, сравниваем username
                 const isSelfExchange = isAdmin
                     ? selectedUserId && parseInt(selectedUserId) === plant.userId
                     : plant.username === currentUsername;
@@ -22,12 +28,34 @@ const PlantList = ({ plants, selectedUserId, onExchange }) => {
                         key={plant.id}
                         className="card"
                         style={{
-                            backgroundColor: "#bbf7d0",
+                            backgroundColor: "#9333ea",
                             borderRadius: "1rem",
-                            padding: "1.5rem"
+                            padding: "1.5rem",
+                            color: "#fff",
+                            boxShadow: "0 0 20px rgba(199, 84, 255, 0.4)",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                            minHeight: "250px",
+                            maxWidth: "260px",
+                            width: "100%",
+                            transition: "transform 0.3s ease, box-shadow 0.3s ease"
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = "scale(1.03)";
+                            e.currentTarget.style.boxShadow = "0 0 25px rgba(255, 255, 255, 0.3)";
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = "scale(1)";
+                            e.currentTarget.style.boxShadow = "0 0 20px rgba(199, 84, 255, 0.4)";
                         }}
                     >
-                        <h2 style={{ color: "#15803d" }}>{plant.name}</h2>
+                        <h2 style={{
+                            fontSize: "1.5rem",
+                            marginBottom: "0.75rem",
+                            fontWeight: "bold",
+                            color: "#ffffff"
+                        }}>{plant.name}</h2>
                         <p>Тип: {plant.type}</p>
                         <p>{plant.description}</p>
                         <p>Регион: {plant.region}</p>
@@ -37,13 +65,28 @@ const PlantList = ({ plants, selectedUserId, onExchange }) => {
                         </p>
 
                         {isSelfExchange ? (
-                            <p style={{ fontSize: "0.9rem", marginTop: "1rem", color: "#666" }}>
+                            <p style={{
+                                fontSize: "0.9rem",
+                                marginTop: "1rem",
+                                color: "#ddd"
+                            }}>
                                 Нельзя обмениваться с собой
                             </p>
                         ) : (
                             <button
                                 className="button"
-                                style={{ backgroundColor: "#22c55e" }}
+                                style={{
+                                    backgroundColor: "#c084fc",
+                                    color: "#1a001f",
+                                    fontWeight: "bold",
+                                    width: "100%",
+                                    padding: "0.75rem",
+                                    border: "none",
+                                    borderRadius: "0.75rem",
+                                    boxShadow: "0 0 12px rgba(199, 84, 255, 0.6)",
+                                    cursor: "pointer",
+                                    marginTop: "1rem"
+                                }}
                                 onClick={() => onExchange(plant.id, plant.userId)}
                             >
                                 Запросить обмен

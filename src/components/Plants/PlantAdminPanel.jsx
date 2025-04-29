@@ -6,7 +6,7 @@ const PlantAdminPanel = ({ plants, onRefresh }) => {
     const [formData, setFormData] = useState({});
     const [toastMessage, setToastMessage] = useState(null);
 
-    const showToast = (msg, color = "#22c55e") => {
+    const showToast = (msg, color = "#c084fc") => {
         setToastMessage({ msg, color });
         setTimeout(() => setToastMessage(null), 3000);
     };
@@ -37,39 +37,53 @@ const PlantAdminPanel = ({ plants, onRefresh }) => {
             setSelectedPlant(null);
             onRefresh();
         } catch {
-            showToast("❌ Ошибка при обновлении", "red");
+            showToast("❌ Ошибка при обновлении", "#ef4444");
         }
     };
 
     const handleDelete = async () => {
-
-            try {
-                await authFetch(`http://localhost:8080/plants/${selectedPlant.id}`, {
-                    method: "POST",
-                });
-                showToast("🗑️ Удалено");
-                setSelectedPlant(null);
-                onRefresh();
-            } catch {
-                showToast("❌ Ошибка при удалении", "red");
-            }
+        try {
+            await authFetch(`http://localhost:8080/plants/${selectedPlant.id}`, {
+                method: "POST",
+            });
+            showToast("🗑️ Удалено");
+            setSelectedPlant(null);
+            onRefresh();
+        } catch {
+            showToast("❌ Ошибка при удалении", "#ef4444");
+        }
     };
 
     return (
-        <div className="card" style={{ padding: "2rem", marginTop: "3rem", position: "relative" }}>
-            <h2>✏️ Удалить / Редактировать растение</h2>
+        <div className="card" style={{
+            backgroundColor: "#9333ea",
+            borderRadius: "1rem",
+            padding: "2rem",
+            marginTop: "3rem",
+            color: "#fff",
+            boxShadow: "0 0 20px rgba(199, 84, 255, 0.5)",
+            position: "relative"
+        }}>
+            <h2 style={{ marginBottom: "1rem" }}>✏️ Удалить / Редактировать растение</h2>
 
-            <div style={{ display: "flex", gap: "1rem", marginBottom: "2rem", flexWrap: "wrap" }}>
+            <div style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "1rem",
+                marginBottom: "2rem"
+            }}>
                 {plants.map((plant) => (
                     <div
                         key={plant.id}
                         onClick={() => handleSelect(plant)}
                         style={{
-                            border: "2px solid green",
                             padding: "1rem",
                             borderRadius: "1rem",
                             cursor: "pointer",
-                            backgroundColor: selectedPlant?.id === plant.id ? "#a7f3d0" : "transparent",
+                            backgroundColor: selectedPlant?.id === plant.id ? "#c084fc" : "#a855f7",
+                            boxShadow: selectedPlant?.id === plant.id ? "0 0 12px #e9d5ff" : "none",
+                            color: "#fff",
+                            transition: "all 0.3s"
                         }}
                     >
                         <strong>{plant.name}</strong>
@@ -84,65 +98,33 @@ const PlantAdminPanel = ({ plants, onRefresh }) => {
                 <div>
                     <h3>Редактировать «{selectedPlant.name}»</h3>
 
-                    <label>Название</label>
-                    <input
-                        value={formData.name}
-                        onChange={(e) => handleChange("name", e.target.value)}
-                        className="admin-input"
-                    />
+                    {["name", "type", "description", "username", "region"].map((field) => (
+                        <div key={field} style={{ marginBottom: "1rem" }}>
+                            <label style={{ display: "block", marginBottom: "0.3rem" }}>
+                                {field === "username" ? "Имя пользователя" : field.charAt(0).toUpperCase() + field.slice(1)}
+                            </label>
+                            {field === "description" ? (
+                                <textarea
+                                    value={formData[field]}
+                                    onChange={(e) => handleChange(field, e.target.value)}
+                                    rows={3}
+                                    style={inputStyle}
+                                />
+                            ) : (
+                                <input
+                                    value={formData[field]}
+                                    onChange={(e) => handleChange(field, e.target.value)}
+                                    style={inputStyle}
+                                />
+                            )}
+                        </div>
+                    ))}
 
-                    <label>Тип</label>
-                    <input
-                        value={formData.type}
-                        onChange={(e) => handleChange("type", e.target.value)}
-                        className="admin-input"
-                    />
-
-                    <label>Описание</label>
-                    <textarea
-                        value={formData.description}
-                        onChange={(e) => handleChange("description", e.target.value)}
-                        className="admin-input"
-                    />
-
-                    <label>Имя пользователя (username)</label>
-                    <input
-                        value={formData.username}
-                        onChange={(e) => handleChange("username", e.target.value)}
-                        className="admin-input"
-                    />
-
-                    <label>Регион</label>
-                    <input
-                        value={formData.region}
-                        onChange={(e) => handleChange("region", e.target.value)}
-                        className="admin-input"
-                    />
-
-                    <div style={{ display: "flex", gap: "1rem" }}>
-                        <button
-                            onClick={handleUpdate}
-                            style={{
-                                backgroundColor: "#22c55e",
-                                color: "white",
-                                padding: "0.5rem 1rem",
-                                borderRadius: "0.5rem",
-                                border: "none",
-                            }}
-                        >
+                    <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+                        <button onClick={handleUpdate} style={buttonStyle("#c084fc", "#1a001f")}>
                             Сохранить изменения
                         </button>
-
-                        <button
-                            onClick={handleDelete}
-                            style={{
-                                backgroundColor: "red",
-                                color: "white",
-                                padding: "0.5rem 1rem",
-                                borderRadius: "0.5rem",
-                                border: "none",
-                            }}
-                        >
+                        <button onClick={handleDelete} style={buttonStyle("#ef4444", "white")}>
                             Удалить растение
                         </button>
                     </div>
@@ -150,25 +132,45 @@ const PlantAdminPanel = ({ plants, onRefresh }) => {
             )}
 
             {toastMessage && (
-                <div
-                    style={{
-                        position: "fixed",
-                        bottom: "2rem",
-                        right: "2rem",
-                        backgroundColor: toastMessage.color,
-                        color: "white",
-                        padding: "1rem 1.5rem",
-                        borderRadius: "0.75rem",
-                        boxShadow: "0 0 15px rgba(0,0,0,0.2)",
-                        fontWeight: "bold",
-                        zIndex: 1000,
-                    }}
-                >
+                <div style={{
+                    position: "fixed",
+                    bottom: "2rem",
+                    right: "2rem",
+                    backgroundColor: toastMessage.color,
+                    color: "white",
+                    padding: "1rem 1.5rem",
+                    borderRadius: "0.75rem",
+                    boxShadow: "0 0 15px rgba(0,0,0,0.2)",
+                    fontWeight: "bold",
+                    zIndex: 1000,
+                }}>
                     {toastMessage.msg}
                 </div>
             )}
         </div>
     );
 };
+
+const inputStyle = {
+    width: "100%",
+    padding: "0.6rem 1rem",
+    borderRadius: "0.5rem",
+    border: "none",
+    backgroundColor: "#f3e8ff",
+    color: "#1a001f",
+    fontSize: "1rem",
+    boxSizing: "border-box"
+};
+
+const buttonStyle = (bg, textColor) => ({
+    backgroundColor: bg,
+    color: textColor,
+    padding: "0.6rem 1.2rem",
+    borderRadius: "0.5rem",
+    border: "none",
+    fontWeight: "bold",
+    cursor: "pointer",
+    boxShadow: "0 0 10px rgba(0,0,0,0.2)"
+});
 
 export default PlantAdminPanel;

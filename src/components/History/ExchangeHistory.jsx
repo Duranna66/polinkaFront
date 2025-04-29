@@ -26,11 +26,11 @@ const ExchangeHistory = ({ selectedUserId, history, allHistory, activeTab, switc
         <div
             className="card"
             style={{
-                backgroundColor: "#fff",
+                backgroundColor: "#9333ea",
                 borderRadius: "1rem",
                 padding: "1.5rem",
-                boxShadow: "0 0 15px rgba(0,0,0,0.1)",
-                marginBottom: "2rem"
+                boxShadow: "0 0 20px rgba(199, 84, 255, 0.6)",
+                color: "#fff"
             }}
         >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -40,12 +40,14 @@ const ExchangeHistory = ({ selectedUserId, history, allHistory, activeTab, switc
                 <button
                     onClick={onHide}
                     style={{
-                        backgroundColor: "#ccc",
+                        backgroundColor: "#c084fc",
                         border: "none",
                         borderRadius: "0.5rem",
                         padding: "0.4rem 1rem",
                         fontWeight: "bold",
-                        color: "#333"
+                        color: "#1a001f",
+                        boxShadow: "0 0 10px rgba(199, 84, 255, 0.4)",
+                        cursor: "pointer"
                     }}
                 >
                     Скрыть
@@ -57,12 +59,13 @@ const ExchangeHistory = ({ selectedUserId, history, allHistory, activeTab, switc
                     <button
                         onClick={() => switchTab("offered")}
                         style={{
-                            backgroundColor: activeTab === "offered" ? "#22c55e" : "#ccc",
+                            backgroundColor: activeTab === "offered" ? "#c084fc" : "#7c3aed",
                             border: "none",
                             borderRadius: "0.5rem",
                             padding: "0.5rem 1rem",
                             fontWeight: "bold",
-                            color: "#fff"
+                            color: "#fff",
+                            cursor: "pointer"
                         }}
                     >
                         Предложенные
@@ -70,12 +73,13 @@ const ExchangeHistory = ({ selectedUserId, history, allHistory, activeTab, switc
                     <button
                         onClick={() => switchTab("request")}
                         style={{
-                            backgroundColor: activeTab === "request" ? "#22c55e" : "#ccc",
+                            backgroundColor: activeTab === "request" ? "#c084fc" : "#7c3aed",
                             border: "none",
                             borderRadius: "0.5rem",
                             padding: "0.5rem 1rem",
                             fontWeight: "bold",
-                            color: "#fff"
+                            color: "#fff",
+                            cursor: "pointer"
                         }}
                     >
                         Запрошенные
@@ -98,11 +102,13 @@ const ExchangeHistory = ({ selectedUserId, history, allHistory, activeTab, switc
                         <button
                                 onClick={() => handleStatusUpdate(ex.id, "Accepted")}
                                 style={{
-                                    backgroundColor: "#22c55e",
-                                    color: "white",
+                                    backgroundColor: "#34d399",
+                                    color: "#fff",
                                     border: "none",
                                     borderRadius: "0.5rem",
-                                    padding: "0.25rem 0.75rem"
+                                    padding: "0.4rem 0.75rem",
+                                    fontWeight: "bold",
+                                    cursor: "pointer"
                                 }}
                             >
                                 Принять
@@ -110,11 +116,13 @@ const ExchangeHistory = ({ selectedUserId, history, allHistory, activeTab, switc
                             <button
                                 onClick={() => handleStatusUpdate(ex.id, "Declined")}
                                 style={{
-                                    backgroundColor: "red",
-                                    color: "white",
+                                    backgroundColor: "#ef4444",
+                                    color: "#fff",
                                     border: "none",
                                     borderRadius: "0.5rem",
-                                    padding: "0.25rem 0.75rem"
+                                    padding: "0.4rem 0.75rem",
+                                    fontWeight: "bold",
+                                    cursor: "pointer"
                                 }}
                             >
                                 Отклонить

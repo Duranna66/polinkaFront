@@ -9,56 +9,40 @@ const PlantForm = ({ newPlant, users, onChange, onSubmit }) => {
         <div
             className="card"
             style={{
-                backgroundColor: "#ffffff",
+                backgroundColor: "#9333ea",
                 borderRadius: "1rem",
                 padding: "2rem",
-                boxShadow: "0 0 15px rgba(34,197,94,0.2)",
+                boxShadow: "0 0 20px rgba(199,84,255,0.6)",
                 marginTop: "2rem",
+                color: "#fff"
             }}
         >
-            <h2 style={{ marginBottom: "1.5rem" }}>➕ Добавить новое растение</h2>
+            <h2 style={{ marginBottom: "1.5rem", fontWeight: "bold" }}>➕ Добавить новое растение</h2>
 
-            <div style={{display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "500px"}}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "500px" }}>
                 <input
                     placeholder="Название"
                     value={newPlant.name}
                     onChange={(e) => onChange("name", e.target.value)}
-                    style={{
-                        padding: "0.5rem",
-                        borderRadius: "0.5rem",
-                        border: "1px solid #ccc"
-                    }}
+                    style={inputStyle}
                 />
                 <input
                     placeholder="Тип"
                     value={newPlant.type}
                     onChange={(e) => onChange("type", e.target.value)}
-                    style={{
-                        padding: "0.5rem",
-                        borderRadius: "0.5rem",
-                        border: "1px solid #ccc"
-                    }}
+                    style={inputStyle}
                 />
                 <textarea
                     placeholder="Описание"
                     value={newPlant.description}
                     onChange={(e) => onChange("description", e.target.value)}
                     rows={3}
-                    style={{
-                        padding: "0.5rem",
-                        borderRadius: "0.5rem",
-                        border: "1px solid #ccc",
-                        resize: "none"
-                    }}
+                    style={{ ...inputStyle, resize: "none" }}
                 />
                 <select
                     value={newPlant.userId}
                     onChange={(e) => onChange("userId", e.target.value)}
-                    style={{
-                        padding: "0.5rem",
-                        borderRadius: "0.5rem",
-                        border: "1px solid #ccc"
-                    }}
+                    style={inputStyle}
                 >
                     <option value="">Выберите пользователя</option>
                     {users.map((u) => (
@@ -72,12 +56,14 @@ const PlantForm = ({ newPlant, users, onChange, onSubmit }) => {
                     disabled={!newPlant.name || !newPlant.type || !newPlant.userId}
                     style={{
                         padding: "0.75rem",
-                        backgroundColor: "#22c55e",
-                        color: "white",
+                        backgroundColor: "#c084fc",
+                        color: "#1a001f",
                         fontWeight: "bold",
                         border: "none",
                         borderRadius: "0.5rem",
-                        cursor: "pointer"
+                        cursor: "pointer",
+                        boxShadow: "0 0 10px rgba(199,84,255,0.6)",
+                        transition: "background-color 0.3s"
                     }}
                 >
                     Добавить
@@ -85,6 +71,16 @@ const PlantForm = ({ newPlant, users, onChange, onSubmit }) => {
             </div>
         </div>
     );
+};
+
+const inputStyle = {
+    padding: "0.6rem 1rem",
+    borderRadius: "0.75rem",
+    border: "none",
+    backgroundColor: "#f3e8ff",
+    color: "#1a001f",
+    fontSize: "1rem",
+    boxSizing: "border-box"
 };
 
 export default PlantForm;
