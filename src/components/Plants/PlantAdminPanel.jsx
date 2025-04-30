@@ -28,7 +28,7 @@ const PlantAdminPanel = ({ plants, onRefresh }) => {
 
     const handleUpdate = async () => {
         try {
-            await authFetch(`http://localhost:8080/plants/${selectedPlant.id}`, {
+            await authFetch(`/api/plants/${selectedPlant.id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
@@ -43,7 +43,7 @@ const PlantAdminPanel = ({ plants, onRefresh }) => {
 
     const handleDelete = async () => {
         try {
-            await authFetch(`http://localhost:8080/plants/${selectedPlant.id}`, {
+            await authFetch(`/api/plants/${selectedPlant.id}`, {
                 method: "POST",
             });
             showToast("🗑️ Удалено");
