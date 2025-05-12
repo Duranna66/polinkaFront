@@ -1,99 +1,16 @@
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  color: #ffffff;
-  background: linear-gradient(-45deg, #1a001f, #32004a, #290033, #1a001f);
-  background-size: 400% 400%;
-  animation: gradientFlow 15s ease infinite;
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
 }
 
-/* 🌌 Анимация перелива */
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.product-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 300px;
+    border-radius: 8px;
+    text-align: center;
+    background: #f9f9f9;
 }
 
-h1 {
-  text-align: center;
-  font-size: 3rem;
-  color: #e9d5ff;
-  text-shadow: 0 0 15px #c084fc;
-  margin-bottom: 2rem;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 2rem;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-.card {
-  background: #a855f7; /* чуть мягче, чем #9333ea */
-  color: white;
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 0 25px rgba(199, 84, 255, 0.7);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: scale(1.03);
-}
-
-.card h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: white;
-}
-
-.card p {
-  margin: 0.3rem 0;
-  color: #ffffff;
-}
-
-.button {
-  margin-top: 1rem;
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #c084fc;
-  color: #1a001f;
-  border: none;
-  border-radius: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 12px rgba(199, 84, 255, 0.7);
-  transition: background 0.3s ease;
-}
-
-.button:hover {
-  background-color: #d8b4fe;
-  color: #1a001f;
-}
-
-.select {
-  padding: 0.6rem 1rem;
-  border-radius: 12px;
-  border: none;
-  font-size: 1rem;
-  background-color: #f3e8ff;
-  color: #1a001f;
-  min-width: 180px;
-}
-
-.toast {
-  background-color: rgba(133, 51, 234, 0.9);
-  border: 1px solid #e9d5ff;
-  color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(199, 84, 255, 0.6);
-}

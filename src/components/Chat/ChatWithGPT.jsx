@@ -88,12 +88,12 @@ const ChatWithDeepSeek = () => {
                     right: "2rem",
                     width: "60px",
                     height: "60px",
-                    backgroundColor: "#c084fc",
+                    backgroundColor: "#fce484",
                     borderRadius: "50%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    color: "#1a001f",
+                    color: "#ead233",
                     fontWeight: "bold",
                     fontSize: "1.5rem",
                     cursor: "pointer",
@@ -114,7 +114,7 @@ const ChatWithDeepSeek = () => {
                 bottom: "2rem",
                 right: "2rem",
                 backgroundColor: "#f3e8ff",
-                color: "#1a001f",
+                color: "#ead233",
                 width: size.width,
                 height: size.height,
                 borderRadius: "0.75rem",
@@ -133,13 +133,13 @@ const ChatWithDeepSeek = () => {
                 alignItems: "center",
                 marginBottom: "0.5rem"
             }}>
-                <h2 style={{ margin: 0, fontSize: "1rem", color: "#9333ea" }}>Чат с DeepSeek</h2>
+                <h2 style={{ margin: 0, fontSize: "1rem", color: "#ead233" }}>Чат с DeepSeek</h2>
                 <button
                     onClick={() => setExpanded(false)}
                     style={{
                         background: "transparent",
                         border: "none",
-                        color: "#9333ea",
+                        color: "#ead233",
                         fontSize: "1.2rem",
                         cursor: "pointer"
                     }}
@@ -163,7 +163,7 @@ const ChatWithDeepSeek = () => {
                 {messages
                     .filter(m => m.role !== 'system')
                     .map((msg, i) => (
-                        <p key={i} style={{ margin: "0.4rem 0", color: "#3b0a4d" }}>
+                        <p key={i} style={{ margin: "0.4rem 0", color: "#ead233" }}>
                             <strong>{msg.role === 'user' ? 'Вы' : 'DeepSeek'}:</strong> {msg.content}
                         </p>
                     ))}
@@ -183,7 +183,7 @@ const ChatWithDeepSeek = () => {
                     outline: "none",
                     marginBottom: "0.5rem",
                     backgroundColor: "#fff0ff",
-                    color: "#1a001f",
+                    color: "#ead233",
                     boxSizing: "border-box"
                 }}
             />
@@ -195,8 +195,8 @@ const ChatWithDeepSeek = () => {
                     padding: "0.5rem",
                     borderRadius: "0.5rem",
                     border: "none",
-                    backgroundColor: "#c084fc",
-                    color: "#1a001f",
+                    backgroundColor: "#8494fc",
+                    color: "#ead233",
                     fontWeight: "bold",
                     fontSize: "0.85rem",
                     cursor: "pointer"
