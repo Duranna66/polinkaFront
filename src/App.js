@@ -1,40 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-import Home from "./pages/Home";
-import LoginForm from "./pages/LoginForm";
-import ProfilePage from "./pages/ProfilePage";
-import ContactPage from "./pages/ContactPage";
-import CarDetails from "./pages/CarDetails";
-import Catalog from "./pages/Catalog";
-import TopNavbar, { Footer } from "./components/TopNavbar";
-import LegalDoc from "./pages/ LegalDoc";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import AuthPage from "./pages/AuthPages";
+
+
+// import AuthPage from "./pages/AuthPage";
+// import MainPage from "./pages/MainPage";
+// import StudentProfile from "./pages/StudentProfile";
+// import ScheduleEdit from "./pages/ScheduleEdit";
+// import GradesModule from "./pages/GradesModule";
+// import RequestDocumentForm from "./pages/RequestDocumentForm";
 
 function App() {
-    const [search, setSearch] = useState("");
-    const [localCars, setLocalCars] = useState([]);
-    const [user, setUser] = useState(() => {
-        const saved = localStorage.getItem("user");
-        return saved ? JSON.parse(saved) : null;
-    });
-
     return (
-        <div className="layout"> {/* ← обертка */}
-            <Router>
-                <TopNavbar user={user} setUser={setUser} localCars={localCars} setLocalCars={setLocalCars} />
-                <main>
-                    <Routes>
-                        <Route path="/legal" element={<LegalDoc />} />
-                        <Route path="/login" element={<LoginForm setUser={setUser} />} />
-                        <Route path="/" element={<Home search={search} />} />
-                        <Route path="/profile" element={<ProfilePage />} />
-                        <Route path="/contacts" element={<ContactPage />} />
-                        <Route path="/catalog" element={<Catalog localCars={localCars} setLocalCars={setLocalCars} />} />
-                        <Route path="/catalog/:id" element={<CarDetails />} />
-                    </Routes>
-                </main>
-                <Footer />
-            </Router>
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Navigate to="/auth" />} />
+                <Route path="/auth" element={<AuthPage />} />
+                {/*<Route path="/main" element={<MainPage />} />*/}
+                {/*<Route path="/profile" element={<StudentProfile />} />*/}
+                {/*<Route path="/schedule" element={<ScheduleEdit />} />*/}
+                {/*<Route path="/grades" element={<GradesModule />} />*/}
+                {/*<Route path="/documents" element={<RequestDocumentForm />} />*/}
+            </Routes>
+        </Router>
     );
 }
 
