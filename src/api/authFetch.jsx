@@ -1,13 +1,17 @@
-const authFetch = (url, options = {}) => {
-    const token = localStorage.getItem("token");
-    return fetch(url, {
-        ...options,
-        headers: {
-            ...options.headers,
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-        },
-    });
-};
+import axios from "axios";
+import config from "../config.js";
 
-export default authFetch;
+const API = axios.create({
+    baseURL: config.apiBaseUrl,
+});
+
+// Если нужен токен:
+API.interceptors.request.use((req) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+        req.headers.Authorization = `Bearer ${token}`;
+    }
+    return req;
+});
+
+export default API;

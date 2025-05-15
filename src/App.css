@@ -1,108 +1,203 @@
-.admin-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  box-sizing: border-box;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.admin-input:focus {
-  border-color: #22c55e;
-  box-shadow: 0 0 5px rgba(34, 197, 94, 0.5);
-  outline: none;
-}
-
 body {
   margin: 0;
-  background-color: #ffe5b4; /* персиковый */
-  font-family: "Segoe UI", sans-serif;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #d8b4fe, #f3e8ff);
+  color: #4c1d95;
 }
 
-h1 {
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  color: #c084fc;
-  text-shadow: 0 0 10px #a855f7;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
+.app-container {
   padding: 2rem;
 }
 
-.filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+.card {
+  background: white;
+  border: 2px solid #c084fc;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 10px rgba(128, 90, 213, 0.2);
+}
+
+.card-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #6b21a8;
+  font-size: 1.5rem;
+}
+
+.map-section {
+  border: 3px solid #9333ea;
+  border-radius: 16px;
+  overflow: hidden;
   margin-bottom: 2rem;
 }
 
-.select {
-  padding: 0.6rem;
-  border-radius: 8px;
-  border: none;
-  font-size: 1rem;
-}
-
-.grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.card {
-  background: linear-gradient(to top left, #ffffff, #ffffff);
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 0 15px rgba(107, 247, 85, 0.4);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: scale(1.03);
-}
-
-.card h2 {
+.map-title {
+  background: #ede9fe;
+  margin: 0;
+  padding: 1rem;
+  border-bottom: 2px solid #c084fc;
+  color: #6b21a8;
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
 }
 
-.card p {
-  margin: 0.3rem 0;
+.logout-button-wrapper {
+  text-align: right;
+  margin-bottom: 1.5rem;
 }
 
-.button {
-  margin-top: 1rem;
-  width: 100%;
-  padding: 0.7rem;
-  background-color: #76ea33;
-  border: none;
-  border-radius: 12px;
+.logout-button {
+  background-color: #9333ea;
   color: white;
+  padding: 0.6rem 1.2rem;
   font-weight: bold;
+  border: none;
+  border-radius: 9999px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s;
 }
 
-.button:hover {
-  background-color: #5bce22;
+.logout-button:hover {
+  background-color: #7e22ce;
 }
 
-.toast {
+/* Затемнённый фон */
+.modal-overlay {
   position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
-  padding: 1rem 2rem;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Модальное окно */
+.modal-content {
+  background: white;
+  padding: 24px;
   border-radius: 12px;
-  border: 1px solid #88ea33;
-  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+/* Анимация */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Поля формы */
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Кнопки */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-buttons .cancel {
+  background-color: #eee;
+}
+
+.modal-buttons .submit {
+  background-color: #6b46c1;
+  color: white;
+}
+
+.leaflet-tooltip {
+  background-color: white;
+  color: #4b0082;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1000;
 }
+
+.modal-content {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+button.danger {
+  background: #c0392b;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+button.cancel {
+  background: #aaa;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/*html, body, #root {*/
+/*  height: 100%;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
+
+/*.map-wrapper {*/
+/*  height: 100px; !* вся высота экрана *!*/
+/*  width: 100%;*/
+/*}*/
