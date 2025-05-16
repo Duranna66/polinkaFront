@@ -1,0 +1,36 @@
+.main-container {
+    min-height: 100vh;
+    background-color: #f8f5ff;
+    padding: 2rem;
+    text-align: center;
+    color: #4c1d95;
+    font-family: sans-serif;
+}
+
+.main-container h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #6b21a8;
+}
+
+.button-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.button-grid button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    background-color: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button-grid button:hover {
+    background-color: #5b21b6;
+}

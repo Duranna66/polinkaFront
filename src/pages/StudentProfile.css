@@ -1,0 +1,61 @@
+.profile-container {
+    min-height: 100vh;
+    background-color: #faf5ff;
+    padding: 2rem;
+    font-family: sans-serif;
+    color: #4c1d95;
+}
+
+.profile-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #6b21a8;
+}
+
+.info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.info-block label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.info-block input {
+    padding: 0.5rem;
+    border: 1px solid #d8b4fe;
+    background-color: #f3e8ff;
+    border-radius: 5px;
+}
+
+.grades-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.grade-row {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ede9fe;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    border: 1px solid #c4b5fd;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    background-color: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5b21b6;
+}

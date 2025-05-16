@@ -1,81 +1,77 @@
-// src/api.js
-const BASE_URL = "/api"; // меняй при необходимости
+const BASE_URL = "http://localhost:8080/api/v1";
 
-export async function getPopularCars() {
-    const res = await fetch(`${BASE_URL}/cars`);
-    return await res.json();
+// универсальный fetch с включённой сессией
+async function fetchWithSession(url, options = {}) {
+    const res = await fetch(url, {
+        ...options,
+        credentials: "include", // 🔑 сохраняет и отправляет JSESSIONID
+        headers: {
+            "Content-Type": "application/json",
+            ...options.headers,
+        },
+    });
+    if (!res.ok) throw new Error(await res.text());
+    return res.json();
 }
 
-export async function searchCars(query) {
-    const res = await fetch(`${BASE_URL}/cars/search?q=${encodeURIComponent(query)}`);
-    return await res.json();
-}
-
-export async function getCarById(id) {
-    const res = await fetch(`${BASE_URL}/cars/${id}`);
-    return await res.json();
-}
-
+// 🔐 Аутентификация
 export async function loginUser(credentials) {
-    const res = await fetch(`${BASE_URL}/auth/login`, {
+    const res = await fetch(`${BASE_URL}/auth/signin`, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
     });
 
-    if (!res.ok) {
-        throw new Error("Ошибка входа");
-    }
+    if (!res.ok) throw new Error("Неверные данные для входа");
 
-    return await res.json();
+    return res.text(); // опционально вернёт "вход выполнен"
 }
 
-export async function registerUser(userData) {
-    const res = await fetch(`${BASE_URL}/auth/register`, {
+// 👤 Студент
+export async function getStudentProfile(id) {
+    return fetchWithSession(`${BASE_URL}/student/${id}`);
+}
+
+export async function updateStudentProfile(id, data) {
+    return fetchWithSession(`${BASE_URL}/student/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+    });
+}
+
+// 📅 Расписание
+export async function getSchedule(group) {
+    return fetchWithSession(`${BASE_URL}/schedule/${group}`);
+}
+
+export async function saveSchedule(rows) {
+    return fetchWithSession(`${BASE_URL}/schedule`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(rows),
     });
-
-    if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text || "Ошибка регистрации");
-    }
-
-    return await res.text(); // вернёт "Регистрация успешна"
 }
 
-// ✅ Получить корзину пользователя
-export async function getCart(email) {
-    const res = await fetch(`${BASE_URL}/cart/${encodeURIComponent(email)}`);
-    if (!res.ok) throw new Error("Ошибка при получении корзины");
-    return await res.json();
+// 📚 Оценки
+export async function getGrades(studentId) {
+    return fetchWithSession(`${BASE_URL}/grades/${studentId}`);
 }
 
-// ✅ Добавить товар в корзину
-export async function addToCart({ email, carId }) {
-    const res = await fetch(`${BASE_URL}/cart/add`, {
+export async function saveGrades(studentId, grades) {
+    return fetchWithSession(`${BASE_URL}/grades/${studentId}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, carId }),
+        body: JSON.stringify(grades),
     });
-
-    if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text || "Не удалось добавить в корзину");
-    }
-
-    return await res.text(); // например, "Добавлено"
 }
 
-export async function removeFromCart(email, carId) {
-    const res = await fetch(`${BASE_URL}/cart/remove?email=${email}&carId=${carId}`, {
-        method: "DELETE",
+// 📄 Заявки на документы
+export async function submitDocumentRequest(doc) {
+    return fetchWithSession(`${BASE_URL}/documents`, {
+        method: "POST",
+        body: JSON.stringify(doc),
     });
+}
 
-    if (!res.ok) {
-        throw new Error("Не удалось удалить из корзины");
-    }
-
-    return await res.text();
+export async function getDocuments(studentId) {
+    return fetchWithSession(`${BASE_URL}/documents/${studentId}`);
 }

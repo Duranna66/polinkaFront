@@ -35,3 +35,9 @@
 .auth-container button:hover {
     background-color: #6b21a8;
 }
+
+.auth-error {
+    color: #b91c1c;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
