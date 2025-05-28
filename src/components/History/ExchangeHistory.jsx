@@ -4,7 +4,7 @@ import authFetch from "../../api/authFetch";
 const ExchangeHistory = ({ selectedUserId, history, allHistory, activeTab, switchTab, refreshHistory, onHide }) => {
     const handleStatusUpdate = async (id, status) => {
         try {
-            await authFetch(`http://localhost:8080/exchanges/${id}/status?status=${status}`, {
+            await authFetch(`/api/exchanges/${id}/status?status=${status}`, {
                 method: "PATCH",
             });
 

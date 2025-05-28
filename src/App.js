@@ -9,7 +9,7 @@ import ExchangeHistory from "./components/History/ExchangeHistory";
 import authFetch from "./api/authFetch";
 import PlantAdminPanel from "./components/Plants/PlantAdminPanel";
 
-const API_BASE = "http://localhost:8080";
+const API_BASE = "/api";
 
 function App() {
     const [plants, setPlants] = useState([]);

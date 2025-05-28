@@ -12,10 +12,10 @@ const ChatWithDeepSeek = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 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'
+                'Authorization': 'Bearer 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'
             },
             body: JSON.stringify({
-                model: 'google/gemini-2.0-flash-thinking-exp-1219:free',
+                model: 'deepseek/deepseek-chat-v3-0324:free',
                 messages: allMessages,
                 stream: false
             })
