@@ -8,7 +8,7 @@ export default function AllReviewsModal({ collectionId, onClose }) {
     useEffect(() => {
         if (!collectionId) return;
 
-        API.get(`/reviews/${collectionId}`)
+        API.get(`http://localhost:8080/reviews/${collectionId}`)
             .then(res => setReviews(res.data))
             .catch(err => console.error("Ошибка загрузки отзывов", err));
     }, [collectionId]);

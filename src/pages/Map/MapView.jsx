@@ -109,7 +109,7 @@ export default function HomePage() {
                     <button
                         onClick={() => setShowRouteModal(true)}
                         style={{
-                            backgroundColor: "#6a1b9a",
+                            backgroundColor: "#1b9a21",
                             color: "white",
                             border: "none",
                             padding: "12px 24px",
@@ -119,8 +119,8 @@ export default function HomePage() {
                             fontSize: "1rem",
                             transition: "background-color 0.2s ease",
                         }}
-                        onMouseOver={(e) => (e.target.style.backgroundColor = "#5e1785")}
-                        onMouseOut={(e) => (e.target.style.backgroundColor = "#6a1b9a")}
+                        onMouseOver={(e) => (e.target.style.backgroundColor = "#268517")}
+                        onMouseOut={(e) => (e.target.style.backgroundColor = "#239a1b")}
                     >
                         ➕ Создать маршрут из {selectedPlaces.length} точек
                     </button>

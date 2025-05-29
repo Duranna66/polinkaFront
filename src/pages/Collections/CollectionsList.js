@@ -28,7 +28,7 @@ export default function CollectionsList({ collections, setCollections, onAddClic
             }}>
                 <h2 style={{ margin: 0 }}>📅 Мои коллекции</h2>
                 <button onClick={onAddClick} style={{
-                    backgroundColor: "#9333ea",
+                    backgroundColor: "#33ea42",
                     color: "white",
                     border: "none",
                     padding: "0.5rem 1rem",

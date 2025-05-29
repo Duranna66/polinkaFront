@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #d8b4fe, #f3e8ff);
-  color: #4c1d95;
+  background: linear-gradient(to bottom, #b4fed9, #f3e8ff);
+  color: #21951d;
 }
 
 .app-container {
@@ -11,22 +11,22 @@ body {
 
 .card {
   background: white;
-  border: 2px solid #c084fc;
+  border: 2px solid #a2fc84;
   border-radius: 16px;
   padding: 1.5rem;
   margin-bottom: 2rem;
-  box-shadow: 0 0 10px rgba(128, 90, 213, 0.2);
+  box-shadow: 0 0 10px rgba(90, 213, 195, 0.2);
 }
 
 .card-title {
   margin-top: 0;
   margin-bottom: 1rem;
-  color: #6b21a8;
+  color: #3aa821;
   font-size: 1.5rem;
 }
 
 .map-section {
-  border: 3px solid #9333ea;
+  border: 3px solid #4bea33;
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 2rem;
@@ -36,8 +36,8 @@ body {
   background: #ede9fe;
   margin: 0;
   padding: 1rem;
-  border-bottom: 2px solid #c084fc;
-  color: #6b21a8;
+  border-bottom: 2px solid #9efc84;
+  color: #3ea821;
   font-size: 1.5rem;
 }
 
@@ -47,7 +47,7 @@ body {
 }
 
 .logout-button {
-  background-color: #9333ea;
+  background-color: #45ea33;
   color: white;
   padding: 0.6rem 1.2rem;
   font-weight: bold;
@@ -58,7 +58,7 @@ body {
 }
 
 .logout-button:hover {
-  background-color: #7e22ce;
+  background-color: #33ce22;
 }
 
 /* Затемнённый фон */
@@ -130,13 +130,13 @@ body {
 }
 
 .modal-buttons .submit {
-  background-color: #6b46c1;
+  background-color: #46c148;
   color: white;
 }
 
 .leaflet-tooltip {
   background-color: white;
-  color: #4b0082;
+  color: #048200;
   font-weight: bold;
   padding: 4px 8px;
   border-radius: 4px;
