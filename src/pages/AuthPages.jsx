@@ -7,6 +7,7 @@ export default function AuthPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async () => {
@@ -15,11 +16,16 @@ export default function AuthPage() {
             return;
         }
 
+        setLoading(true);
+        setError("");
+
         try {
             await loginUser({ email: username, password });
             navigate("/main");
         } catch (err) {
             setError("Неверный логин или пароль");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -42,7 +48,9 @@ export default function AuthPage() {
 
             {error && <p className="auth-error">{error}</p>}
 
-            <button onClick={handleLogin}>Войти</button>
+            <button onClick={handleLogin} disabled={loading}>
+                {loading ? "Вход..." : "Войти"}
+            </button>
         </div>
     );
 }

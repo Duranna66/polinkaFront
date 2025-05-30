@@ -28,6 +28,18 @@ export async function loginUser(credentials) {
     return res.text(); // опционально вернёт "вход выполнен"
 }
 
+export async function checkAuth() {
+    const res = await fetch(`${BASE_URL}/auth/check`, {
+        credentials: "include",
+    });
+    console.log(res);
+    if (!res.ok) {
+        throw new Error("Пользователь не авторизован");
+    }
+
+    return res.json(); // ожидается { studentId: ... }
+}
+
 // 👤 Студент
 export async function getStudentProfile(id) {
     return fetchWithSession(`${BASE_URL}/student/${id}`);
@@ -74,4 +86,15 @@ export async function submitDocumentRequest(doc) {
 
 export async function getDocuments(studentId) {
     return fetchWithSession(`${BASE_URL}/documents/${studentId}`);
+}
+
+
+export async function getAllStudents() {
+    return fetchWithSession(`${BASE_URL}/student/all`);
+}
+export async function createStudentProfile(data) {
+    return fetchWithSession(`${BASE_URL}/student`, {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
 }

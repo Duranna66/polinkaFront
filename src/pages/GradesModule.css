@@ -66,3 +66,21 @@ button {
 button:hover {
     background-color: #5b21b6;
 }
+
+input {
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: #7a5df3;
+    box-shadow: 0 0 5px rgba(122, 93, 243, 0.3);
+    background-color: #fff;
+}

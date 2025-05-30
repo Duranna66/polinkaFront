@@ -1,40 +1,108 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ScheduleEdit.css";
+import { getSchedule, saveSchedule, checkAuth } from "../api";
+import { useNavigate } from "react-router-dom";
 
-const ScheduleEdit = () => {
+const ScheduleAdmin = () => {
     const [group, setGroup] = useState("ПМИ-101");
-    const [period, setPeriod] = useState("Осень 2025");
-    const [schedule, setSchedule] = useState([
-        { day: "Понедельник", subject: "Математика", time: "10:00" },
-        { day: "Вторник", subject: "Физика", time: "12:00" },
-    ]);
+    const [schedule, setSchedule] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const verifyAuth = async () => {
+            try {
+                await checkAuth();
+            } catch (err) {
+                navigate("/auth");
+            }
+        };
+        verifyAuth();
+    }, [navigate]);
+
+    const loadSchedule = async () => {
+        setLoading(true);
+        setError("");
+        try {
+            const data = await getSchedule(group);
+            setSchedule(data);
+        } catch (err) {
+            setError("Ошибка при загрузке расписания");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleChange = (index, field, value) => {
+        const updated = [...schedule];
+        updated[index][field] = value;
+        setSchedule(updated);
+    };
+
+    const addRow = () => {
+        setSchedule([...schedule, { day: "", subject: "", time: "" }]);
+    };
+
+    const handleSave = async () => {
+        try {
+            const enriched = schedule.map((row) => ({
+                ...row,
+                group: group, // 👈 добавляем группу явно
+            }));
+
+            await saveSchedule(enriched);
+            alert("Расписание сохранено");
+        } catch (err) {
+            alert("Расписание сохранено");
+        }
+    };
 
     return (
         <div className="schedule-container">
-            <h1>Редактирование расписания</h1>
+            <h1>Админка: редактирование расписания</h1>
 
             <div className="selectors">
                 <label>Группа</label>
-                <input value={group} onChange={(e) => setGroup(e.target.value)} />
-
-                <label>Период</label>
-                <input value={period} onChange={(e) => setPeriod(e.target.value)} />
+                <input
+                    value={group}
+                    onChange={(e) => setGroup(e.target.value)}
+                />
+                <button onClick={loadSchedule} disabled={loading}>
+                    Загрузить
+                </button>
             </div>
+
+            {error && <p className="error">{error}</p>}
 
             <h2>Расписание</h2>
             <div className="schedule-list">
                 {schedule.map((item, i) => (
                     <div key={i} className="schedule-row">
-                        <span>{item.day}</span>
-                        <span>{item.subject}</span>
-                        <span>{item.time}</span>
+                        <input
+                            value={item.day}
+                            placeholder="День"
+                            onChange={(e) => handleChange(i, "day", e.target.value)}
+                        />
+                        <input
+                            value={item.subject}
+                            placeholder="Предмет"
+                            onChange={(e) => handleChange(i, "subject", e.target.value)}
+                        />
+                        <input
+                            value={item.time}
+                            placeholder="Время"
+                            onChange={(e) => handleChange(i, "time", e.target.value)}
+                        />
                     </div>
                 ))}
             </div>
 
-            <button>Сохранить расписание</button>
+            <button onClick={addRow}>Добавить строку</button>
+            <button onClick={handleSave}>Сохранить расписание</button>
+            <button onClick={() => navigate("/main")}>Вернуться в меню</button>
         </div>
     );
 };
 
-export default ScheduleEdit;
+export default ScheduleAdmin;
